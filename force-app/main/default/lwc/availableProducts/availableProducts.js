@@ -1,13 +1,15 @@
 import { LightningElement,api } from 'lwc';
 import {ShowToastEvent} from 'lightning/platformShowToastEvent';
+//Apex Methods
 import getAvailableProducts from '@salesforce/apex/AvailableProductsController.getAvailableProducts';
 import addProductToOrder from '@salesforce/apex/AvailableProductsController.addProductToOrder';
+//Custom Labels
 import NoResultsFound from "@salesforce/label/c.NoResultsFound";
 import AvailableProductsLabel from "@salesforce/label/c.AvailableProducts";
 import ProductAdded from "@salesforce/label/c.ProductAdded";
 import Success from "@salesforce/label/c.Success";
-Success
 
+//Constants
 const actions = [
     { label: 'Add', name: 'add' },
 ];
@@ -44,6 +46,7 @@ export default class AvailableProducts extends LightningElement
     strSuccessMessage;
     strSuccess;
 
+    // Constructor of the LWC
     constructor() 
     {
         super();
@@ -64,6 +67,7 @@ export default class AvailableProducts extends LightningElement
         this.loadAvailableProducts();
     }
 
+    //Method to get avaliable products sorted
     @api
     loadAvailableProducts()
     {
@@ -103,6 +107,7 @@ export default class AvailableProducts extends LightningElement
         });        
     }    
     
+    //Method to sort data table values
     sortBy(field, reverse, primer) 
     {
         const key = primer
@@ -120,6 +125,7 @@ export default class AvailableProducts extends LightningElement
         };
     }
 
+    //Method to handle onsort event
     onHandleSort(event) {
         const { fieldName: sortedBy, sortDirection } = event.detail;
         const cloneData = [...this.data];
@@ -130,6 +136,7 @@ export default class AvailableProducts extends LightningElement
         this.sortedBy = sortedBy;
     }
 
+    //Method to handle row action of datatable
     handleRowAction(event) 
     {
         this.showLoadingSpinner = true;
@@ -141,9 +148,9 @@ export default class AvailableProducts extends LightningElement
         }
     }
     
+    //Method to add a product to the order
     addProduct(row)
     {
-        console.log('@@@ Add ' + JSON.stringify(row) );
         addProductToOrder({strOrderId: this.recordId, strProductId : row.productId, strPricebookEntryId : row.priceBookEntryId, decUnitPrice : row.listPrice})
         .then(() => {
             this.dispatchEvent(
@@ -168,13 +175,16 @@ export default class AvailableProducts extends LightningElement
             this.showLoadingSpinner = false;
         });        
     }
-
+    
+    //Method to sent an event to RefreshOderLRP Aura component and refresh view
+    //without reload the page
     forceRefreshView() 
     {
         this.dispatchEvent(new CustomEvent("forceRefreshView", { detail: null }));
     }            
 
-
+    //Method to show error messages in a friendly way, for now only removes tags of 
+    //custom validation exceptions but can be improved.
     friendlyErrorMessage(errorMessage)
     {
         if(errorMessage.includes("FIELD_CUSTOM_VALIDATION_EXCEPTION")){
