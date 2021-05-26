@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AvailableProducts</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>AvailableProducts</shortDescription>
+        <value>Available Products</value>
+    </labels>
+    <labels>
+        <fullName>NoResultsFound</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NoResultsFound</shortDescription>
+        <value>No Results Found</value>
+    </labels>
+    <labels>
+        <fullName>ProductAdded</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ProductAdded</shortDescription>
+        <value>Product Added</value>
+    </labels>
+    <labels>
+        <fullName>Success</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Success</shortDescription>
+        <value>Success</value>
+    </labels>
+</CustomLabels>

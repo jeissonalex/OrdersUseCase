@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <!--ATTRIBUTES-->  
+  <aura:attribute name="recordId" type="Id"/>
+    
+  <aura:handler event="force:refreshView" action="{! c.handleForceRefreshViewForLWC }"></aura:handler>
+    
+  <c:availableProducts aura:id="availableProductsLWC" onforceRefreshView="{!c.forceRefreshView}" recordId="{!v.recordId}"></c:availableProducts>   
+</aura:component>

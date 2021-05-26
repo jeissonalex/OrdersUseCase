@@ -1,12 +1,31 @@
 <template>
-    <lightning-datatable
-            key-field="id"
-            columns={columns}
-            data={data}
-            hide-checkbox-column
-            default-sort-direction={defaultSortDirection}
-            sorted-direction={sortDirection}
-            sorted-by={sortedBy}
-            onsort={onHandleSort}>
-    </lightning-datatable>
+    <div class="backgroundWhite" style="position:relative">    
+        <div if:true={showLoadingSpinner}>
+            <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+        </div>    
+        <template if:false={noResults}>
+            <lightning-card title={strAvailableProducts}>
+                <lightning-datatable
+                        key-field="id"
+                        columns={columns}
+                        data={data}
+                        hide-checkbox-column
+                        default-sort-direction={defaultSortDirection}
+                        sorted-direction={sortDirection}
+                        sorted-by={sortedBy}
+                        onsort={onHandleSort}
+                        onrowaction={handleRowAction}>
+                </lightning-datatable>
+            </lightning-card>
+        </template>
+        <template if:true={noResults}>
+            <h3 class="slds-text-align_center slds-text-heading_medium">{strNoresultsFound}</h3>
+            <br/>
+            <div class="slds-illustration slds-illustration_small slds-p-vertical_small">
+                <span>
+                    <img src="/img/search/no-results.png" alt={strNoResultsFound} class="slds-illustration__svg slds-m-bottom_none">
+                </span>
+            </div>
+        </template>
+    </div>        
 </template>
