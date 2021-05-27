@@ -15,6 +15,20 @@
         <value>No Results Found</value>
     </labels>
     <labels>
+        <fullName>OrderActivated</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>OrderActivated</shortDescription>
+        <value>Order Activated Successfully</value>
+    </labels>
+    <labels>
+        <fullName>OrderProducts</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>OrderProducts</shortDescription>
+        <value>Order Products</value>
+    </labels>
+    <labels>
         <fullName>ProductAdded</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -29,17 +43,10 @@
         <value>Success</value>
     </labels>
     <labels>
-        <fullName>OrderActivated</fullName>
+        <fullName>WebServiceError</fullName>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>OrderActivated</shortDescription>
-        <value>Order Activated Successfully</value>
-    </labels>
-    <labels>
-        <fullName>OrderProducts</fullName>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>OrderProducts</shortDescription>
-        <value>Order Products</value>
+        <shortDescription>WebServiceError</shortDescription>
+        <value>The status code returned was not expected:</value>
     </labels>
 </CustomLabels>

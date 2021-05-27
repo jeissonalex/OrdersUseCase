@@ -29,12 +29,28 @@
 		<name>CustomLabels</name>
 	</types>
 	<types>
+		<members>*</members>
+		<name>CustomMetadata</name>
+	</types>
+	<types>
+		<members>WebServicesConfiguration__mdt</members>
+		<name>CustomObject</name>
+	</types>
+	<types>
 		<members>Order_Record_Page</members>
 		<name>FlexiPage</name>
 	</types>
 	<types>
+		<members>WebServicesConfiguration__mdt-Web Services Configuration Layout</members>
+		<name>Layout</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>LightningComponentBundle</name>
+	</types>
+	<types>
+		<members>OrderExternalSystem</members>
+		<name>RemoteSiteSetting</name>
 	</types>
 	<types>
 		<members>*</members>

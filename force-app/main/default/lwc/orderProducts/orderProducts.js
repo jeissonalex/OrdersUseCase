@@ -3,7 +3,8 @@ import {ShowToastEvent} from 'lightning/platformShowToastEvent';
 //Apex Methods
 import getOrderProducts from '@salesforce/apex/OrderProductsController.getOrderProducts';
 import isOrderActivated from '@salesforce/apex/OrderProductsController.isOrderActivated';
-import activateOrder from '@salesforce/apex/OrderProductsController.activateOrder';
+import getJSONRequest from '@salesforce/apex/OrderProductsController.getJSONRequest';
+
 
 //Custom Labels
 import NoResultsFound from "@salesforce/label/c.NoResultsFound";
@@ -178,14 +179,25 @@ export default class OrderProducts extends LightningElement
     //Method to change the status of the Order to 'Activated'
     activateOrder(event)
     {
-        activateOrder({strOrderId: this.recordId})
+        getJSONRequest({strOrderId: this.recordId})
         .then(result => 
         {
-            this.dispatchEvent(new ShowToastEvent({
-                title: this.strSuccess,
-                message: this.strSuccessMessage,
-                variant: 'success'
-            }),);
+            if(result ==='OK')
+            {
+                this.dispatchEvent(new ShowToastEvent({
+                    title: this.strSuccess,
+                    message: this.strSuccessMessage,
+                    variant: 'success'
+                }),);
+            }
+            else
+            {
+                this.dispatchEvent(new ShowToastEvent({
+                    title: 'Error',
+                    message: result,
+                    variant: 'error'
+                }),);
+            }
             this.forceRefreshView();
         })
         .catch(error => 
