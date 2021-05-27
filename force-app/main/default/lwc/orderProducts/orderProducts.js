@@ -1,48 +1,45 @@
-import { LightningElement,api } from 'lwc';
+import { LightningElement,api} from 'lwc';
 import {ShowToastEvent} from 'lightning/platformShowToastEvent';
 //Apex Methods
-import getAvailableProducts from '@salesforce/apex/AvailableProductsController.getAvailableProducts';
-import addProductToOrder from '@salesforce/apex/AvailableProductsController.addProductToOrder';
+import getOrderProducts from '@salesforce/apex/OrderProductsController.getOrderProducts';
 import isOrderActivated from '@salesforce/apex/OrderProductsController.isOrderActivated';
+import activateOrder from '@salesforce/apex/OrderProductsController.activateOrder';
+
 //Custom Labels
 import NoResultsFound from "@salesforce/label/c.NoResultsFound";
-import AvailableProductsLabel from "@salesforce/label/c.AvailableProducts";
-import ProductAdded from "@salesforce/label/c.ProductAdded";
 import Success from "@salesforce/label/c.Success";
+import OrderProductsLabel from "@salesforce/label/c.OrderProducts";
+import OrderActivated from "@salesforce/label/c.OrderActivated";
+
 
 //Constants
-const actions = [
-    { label: 'Add', name: 'add' },
-];
-
 const columns = [
     { label: 'Name', fieldName: 'name',sortable: true},
     {
-        label: 'List Price',
-        fieldName: 'listPrice',
+        label: 'Unit Price',
+        fieldName: 'unitPrice',
         type: 'currency',
         sortable: true,
         cellAttributes: { alignment: 'left' },
     },
     {
-        type: 'action',
-        typeAttributes: { rowActions: actions },
-    },
-];
-
-const columnsWithoutAdd = [
-    { label: 'Name', fieldName: 'name',sortable: true},
-    {
-        label: 'List Price',
-        fieldName: 'listPrice',
+        label: 'Quantity',
+        fieldName: 'quantity',
         type: 'currency',
         sortable: true,
         cellAttributes: { alignment: 'left' },
-    },
+    },    
+    {
+        label: 'Total Price',
+        fieldName: 'totalPrice',
+        type: 'currency',
+        sortable: true,
+        cellAttributes: { alignment: 'left' },
+    },    
 ];
-
-export default class AvailableProducts extends LightningElement 
+export default class OrderProducts extends LightningElement 
 {
+
     @api recordId;
 
     data;
@@ -55,7 +52,7 @@ export default class AvailableProducts extends LightningElement
     orderId;
     blnOrderActivated;
     strNoresultsFound;
-    strAvailableProducts;
+    strOrderProducts;
     strSuccessMessage;
     strSuccess;
 
@@ -70,8 +67,8 @@ export default class AvailableProducts extends LightningElement
         this.defaultSortDirection = 'asc';
         this.sortDirection = 'asc';
         this.strNoresultsFound = NoResultsFound;
-        this.strAvailableProducts = AvailableProductsLabel;
-        this.strSuccessMessage = ProductAdded;
+        this.strOrderProducts = OrderProductsLabel;
+        this.strSuccessMessage = OrderActivated;
         this.strSuccess = Success;
         this.blnOrderActivated = false;
     }
@@ -79,9 +76,8 @@ export default class AvailableProducts extends LightningElement
     connectedCallback() 
     { 
         this.validateOrderStatus();
-        this.loadAvailableProducts();
+        this.loadOrderProducts();
     }
-    
     //Method to find out the status of the order
     @api
     validateOrderStatus()
@@ -90,15 +86,14 @@ export default class AvailableProducts extends LightningElement
         isOrderActivated({strOrderId: this.recordId})
         .then(result => 
         {
+            console.log('@@@result ',result);
             if(result)
             {
-                this.columns = columnsWithoutAdd;
                 this.blnOrderActivated = true;
                 this.showLoadingSpinner = false;
             }
             else
             {
-                this.columns = columns;
                 this.blnOrderActivated = false;
                 this.showLoadingSpinner = false; 
             }
@@ -110,14 +105,15 @@ export default class AvailableProducts extends LightningElement
             this.showLoadingSpinner = false;
             console.log('@@@error ',error);
         });        
-    }    
+    }
 
-    //Method to get avaliable products sorted
+    //Method to get the order products
     @api
-    loadAvailableProducts()
+    loadOrderProducts()
     {
+        console.log('@@@loadOrderProducts ',this.recordId);
         this.showLoadingSpinner = true;
-        getAvailableProducts({strOrderId: this.recordId})
+        getOrderProducts({strOrderId: this.recordId})
         .then(result => 
         {
             
@@ -125,16 +121,15 @@ export default class AvailableProducts extends LightningElement
             {
                 this.noResults = false;
                 let recs = [];
-                result.forEach(availableProductsWrapper => {
+                result.forEach(orderProductsWrapper => {
                     let record = {};
-                    record.name = availableProductsWrapper.name;
-                    record.listPrice = availableProductsWrapper.listPrice;
-                    record.priceBookEntryId = availableProductsWrapper.priceBookEntryId;
-                    record.productId = availableProductsWrapper.productId;
+                    record.name = orderProductsWrapper.name;
+                    record.unitPrice = orderProductsWrapper.unitPrice;
+                    record.quantity = orderProductsWrapper.quantity;
+                    record.totalPrice = orderProductsWrapper.totalPrice;
                     recs.push(record);
                 });
                 this.data = recs;
-                //console.log('**lstData',JSON.stringify(this.data));
                 this.showLoadingSpinner = false;
             }
             else
@@ -180,33 +175,18 @@ export default class AvailableProducts extends LightningElement
         this.sortDirection = sortDirection;
         this.sortedBy = sortedBy;
     }
-
-    //Method to handle row action of datatable
-    handleRowAction(event) 
+    //Method to change the status of the Order to 'Activated'
+    activateOrder(event)
     {
-        this.showLoadingSpinner = true;
-        const actionName = event.detail.action.name;
-        const row = event.detail.row;
-        if(actionName === 'add')
+        activateOrder({strOrderId: this.recordId})
+        .then(result => 
         {
-            this.addProduct(row);
-        }
-    }
-    
-    //Method to add a product to the order
-    addProduct(row)
-    {
-        addProductToOrder({strOrderId: this.recordId, strProductId : row.productId, strPricebookEntryId : row.priceBookEntryId, decUnitPrice : row.listPrice})
-        .then(() => {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title : this.strSuccess,
-                    message : this.successMessage,
-                    variant : 'success',
-                }),
-            )
+            this.dispatchEvent(new ShowToastEvent({
+                title: this.strSuccess,
+                message: this.strSuccessMessage,
+                variant: 'success'
+            }),);
             this.forceRefreshView();
-            this.showLoadingSpinner = false;
         })
         .catch(error => 
         {
@@ -217,16 +197,15 @@ export default class AvailableProducts extends LightningElement
                 message: this.friendlyErrorMessage(error.body.message),
                 variant: 'error'
             }),);  
-            this.showLoadingSpinner = false;
         });        
     }
     
-    //Method to sent an event to RefreshOderLRP Aura component and refresh view
+    //Method to sent an event to OrderProductsRefresher Aura component and refresh view
     //without reload the page
     forceRefreshView() 
     {
         this.dispatchEvent(new CustomEvent("forceRefreshView", { detail: null }));
-    }            
+    }    
 
     //Method to show error messages in a friendly way, for now only removes tags of 
     //custom validation exceptions but can be improved.
@@ -240,5 +219,5 @@ export default class AvailableProducts extends LightningElement
             }
         }
         return errorMessage;
-    }
+    }    
 }

@@ -28,4 +28,18 @@
         <shortDescription>Success</shortDescription>
         <value>Success</value>
     </labels>
+    <labels>
+        <fullName>OrderActivated</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>OrderActivated</shortDescription>
+        <value>Order Activated Successfully</value>
+    </labels>
+    <labels>
+        <fullName>OrderProducts</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>OrderProducts</shortDescription>
+        <value>Order Products</value>
+    </labels>
 </CustomLabels>

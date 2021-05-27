@@ -1,5 +1,7 @@
 ({
- 	handleForceRefreshViewForLWC: function(component, event, helper) {
+ 	handleForceRefreshViewForLWC: function(component, event, helper) 
+    {
+        component.find("availableProductsLWC").validateOrderStatus();
         component.find("availableProductsLWC").loadAvailableProducts();
     },       
  	forceRefreshView: function(component, event, helper) 

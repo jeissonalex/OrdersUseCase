@@ -4,5 +4,5 @@
     
   <aura:handler event="force:refreshView" action="{! c.handleForceRefreshViewForLWC }"></aura:handler>
     
-  <c:availableProducts aura:id="availableProductsLWC" onforceRefreshView="{!c.forceRefreshView}" recordId="{!v.recordId}"></c:availableProducts>   
+  <c:orderProducts aura:id="orderProductsLWC" onforceRefreshView="{!c.forceRefreshView}" recordId="{!v.recordId}"></c:orderProducts>   
 </aura:component>
