@@ -20,9 +20,8 @@
 7. Activate 'Standard Price Book'
 > Go to App Launcher→Price Books→Select the 'Standard Price Book' and tick the field 'Active'→Save
 8. Create a new Contract with 'Standard Price Book'
-> Go to App Launcher→Contracts→New→Fill all mandatory fields and in Pricebook field select the 'Standard Price Book' value→Save
-
-9.Activate Contract 
+> Go to App Launcher→Contracts→New→Fill all mandatory fields and in Pricebook field select the 'Standard Price Book' value→Save.
+9. Activate Contract 
 > Go to App Launcher→Contracts→Select contract created on last item and change the Status to 'Activate'→Save
 10. Create an Order
 > Go to App Launcher→Orders→New→Fill all mandatory fields, on Contract Number field select the Contract created in the last items, on Account Name select the same Account that you selected in the Contract creation→Save
