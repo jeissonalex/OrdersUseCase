@@ -57,8 +57,6 @@ public with sharing class OrderProductsController
     @AuraEnabled
     public static List<OrderProductsWrapper> getOrderProducts(String strOrderId) 
     {
-        try 
-        {        
             List<OrderProductsWrapper> lstOrderProducts = new List<OrderProductsWrapper>();
             for (OrderItem objOrderItem : [SELECT OrderId,Quantity,Product2.Name,
                                                 UnitPrice,TotalPrice
@@ -73,12 +71,6 @@ public with sharing class OrderProductsController
                 lstOrderProducts.add(objOrderProductsWrapper);
             }
             return lstOrderProducts;
-        }
-        catch (Exception e) 
-        {
-            System.debug('***Exception: getOrderProducts: ' + e.getMessage());
-            throw new AuraHandledException(e.getMessage());
-        }        
     }
     /**
      * @description Method to transform Order data in JSON format and 
@@ -118,7 +110,6 @@ public with sharing class OrderProductsController
                 }
             }
             String strBody = JSON.serialize(objDTOOrder);
-            System.debug('@@Body= ' + strBody);
             //JH Call method to sent JSON Request
             return sentJSONRequest(strBody,strOrderId);
         }

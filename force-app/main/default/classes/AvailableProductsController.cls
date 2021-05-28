@@ -20,12 +20,12 @@ public with sharing class AvailableProductsController
     {
         Map<String,AvailableProductsWrapper> mapAvailableProducts = new Map<String,AvailableProductsWrapper>();
         Map<String,AvailableProductsWrapper> mapOrderProducts = new Map<String,AvailableProductsWrapper>();
-        //JH Available products are queried from PricebookEntry object and from 'Standard' Pricebook
+        //JH Available products are queried from PricebookEntry object and from 'Standard Price Book'
         for (PricebookEntry objPriceBookEntry : [SELECT Id,Name,Pricebook2Id,Pricebook2.Name,
                                                         Product2Id,Product2.ProductCode,
                                                         UnitPrice,UseStandardPrice 
                                                 FROM PricebookEntry 
-                                                WHERE Pricebook2.Name ='Standard' 
+                                                WHERE Pricebook2.Name ='Standard Price Book' 
                                                 ORDER BY Name]) 
         {
             AvailableProductsWrapper objAvailableProdWrapper = new AvailableProductsWrapper();
