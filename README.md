@@ -17,10 +17,12 @@
 >  sfdx force:source:deploy -p '.\force-app\ ' -u YOURALIAS -l RunLocalTests
 6. Assign as Org Default the Order Ligthning Record Page
 > Setup→Object Manager→Order→Lighting Record pages→Order Record Page→Edit→Activation...→Assign as Org Default→Desktop and Phone→Save
-7. Create a new Contract with 'Standard Price Book'
+7. Activate 'Standard Price Book'
+> Go to App Launcher→Price Books→Select the 'Standard Price Book' and tick the field 'Active'→Save
+8. Create a new Contract with 'Standard Price Book'
 > Go to App Launcher→Contracts→New→Fill all mandatory fields and in Pricebook field select the 'Standard Price Book' value→Save
-8.Activate Contract 
+9.Activate Contract 
 > Go to App Launcher→Contracts→Select contract created on last item and change the Status to 'Activate'→Save
-9. Create an Order
+10. Create an Order
 > Go to App Launcher→Orders→New→Fill all mandatory fields, on Contract Number field select the Contract created in the last items, on Account Name select the same Account that you selected in the Contract creation→Save
-10. Have fun and test the functionalities requested :)
+11. Have fun and test the functionalities requested :)
