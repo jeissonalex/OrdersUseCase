@@ -1,18 +1,15 @@
-# Salesforce DX Project: Next Steps
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Preconditions
+- The Order to be tested must belong to an active Contract.
+- The products to be added to the Order must belong to the 'Standard Price Book'.
+- The URL for the web service for the Order is:  https://jahg.requestcatcher.com/ [Request Catcher](https://jahg.requestcatcher.com/), but can be changed in the Web Services Configuration Metadata Type (API: WebServicesConfiguration__mdt) in the field EndPoint (API:EndPoint__c), also you must add the new url to the Remote Sites (Setup→Remote Site Settings→New Remote Site)
 
-## How Do You Plan to Deploy Your Changes?
+## How to deploy this repository
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
-
-## Configure Your Salesforce DX Project
-
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+1. Perform your initial git configuration (set username, email and login with your github account)
+2. Clone the repository
+> git clone https://github.com/jeissonalex/OrdersUseCase.git
+3. Login to your target salesforce Org
+> sfdx force:auth:device:login --setdefaultusername --setalias YOURALIAS
+4. Deploy the metadata in your Salesforce Org
+>  sfdx force:source:deploy -p '.\force-app\' -u YOURALIAS -l RunLocalTests
