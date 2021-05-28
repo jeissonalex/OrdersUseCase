@@ -2,7 +2,7 @@
 ## Preconditions
 - The Order to be tested must belong to an active Contract.
 - The products to be added to the Order must belong to the 'Standard Price Book'.
-- The URL for the web service for the Order is:  https://jahg.requestcatcher.com/ [Request Catcher](https://jahg.requestcatcher.com/), but can be changed in the Web Services Configuration Metadata Type (API: WebServicesConfiguration__mdt) in the field EndPoint (API:EndPoint__c), also you must add the new url to the Remote Sites (Setup→Remote Site Settings→New Remote Site)
+- The custom URL for the web service for the Order is:  [Request Catcher](https://jahg.requestcatcher.com/), but can be changed in the Web Services Configuration Metadata Type (API: WebServicesConfiguration__mdt) in the field EndPoint (API:EndPoint__c), also you must add the new url to the Remote Sites (Setup→Remote Site Settings→New Remote Site)
 
 ## How to deploy this repository
 
