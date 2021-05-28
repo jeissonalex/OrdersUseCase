@@ -9,7 +9,9 @@
 1. Perform your initial git configuration (set username, email and login with your github account)
 2. Clone the repository
 > git clone https://github.com/jeissonalex/OrdersUseCase.git
-3. Login to your target salesforce Org
+3. Go to the folder where was cloned the repository and change to the master branch
+>  git checkout master
+4. Login to your target salesforce Org
 > sfdx force:auth:device:login --setdefaultusername --setalias YOURALIAS
-4. Deploy the metadata in your Salesforce Org
+5. Deploy the metadata in your Salesforce Org
 >  sfdx force:source:deploy -p '.\force-app\' -u YOURALIAS -l RunLocalTests
