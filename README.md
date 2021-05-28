@@ -14,7 +14,7 @@
 4. Login to your target salesforce Org
 > sfdx force:auth:device:login --setdefaultusername --setalias YOURALIAS
 5. Deploy the metadata in your Salesforce Org
->  sfdx force:source:deploy -p '.\force-app\' -u YOURALIAS
+>  sfdx force:source:deploy -p '.\force-app\ ' -u YOURALIAS -l RunLocalTests
 6. Assign as Org Default the Order Ligthning Record Page
 > Setup→Object Manager→Order→Lighting Record pages→Order Record Page→Edit→Activation...→Assign as Org Default→Desktop and Phone→Save
 7. Create a new Contract with 'Standard Price Book'
