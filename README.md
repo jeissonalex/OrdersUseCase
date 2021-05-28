@@ -18,7 +18,7 @@
 6. Assign as Org Default the Order Ligthning Record Page
 > Setup→Object Manager→Order→Lighting Record pages→Order Record Page→Edit→Activation...→Assign as Org Default→Desktop and Phone→Save
 7. Create a new Contract with 'Standard Price Book'
-> Go to App Launcher→Contracts→New→Fill all mandatory fields and in Pricebook field select/type 'Standard Price Book'→Save
+> Go to App Launcher→Contracts→New→Fill all mandatory fields and in Pricebook field select the #'Standard Price Book'# value→Save
 8.Activate Contract 
 > Go to App Launcher→Contracts→Select contract created on last item and change the Status to 'Activate'→Save
 9. Create an Order
